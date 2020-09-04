@@ -51,6 +51,8 @@ router.post('/', (req, res) => {
 
 // Get user data
 router.get('/user/', auth, (req, res) => {
+    // Our custom auth middleware will have added "user" to the request
+    // by this point (unless there was no token)
     User.findById(req.user.id)
     .select('-password')
     .then(user => res.json(user));

@@ -8,8 +8,15 @@ import { Container } from 'reactstrap';
 import store from './store'
 
 import AppNavbar from './components/AppNavbar';
+import { loadUser } from './actions/authActions';
 
 class App extends React.Component {
+  componentDidMount() {
+    // If the user re-loads the website without having logged out,
+    // check if he's still logged in
+    store.dispatch(loadUser());
+  }
+
   render() {
     return (
       <Provider store={store}>
