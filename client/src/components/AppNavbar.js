@@ -68,9 +68,7 @@ class AppNavbar extends React.Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    { isAuthenticated ? authLinks : guestLinks }
-                                </NavItem>
+                                { isAuthenticated ? authLinks : guestLinks }
                             </Nav>
                         </Collapse>
                     </Container>

@@ -3,6 +3,7 @@ import './App.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { Container } from 'reactstrap';
 
 import store from './store'
 
@@ -15,7 +16,13 @@ class App extends React.Component {
         <Router>
           <div className="App">
             <AppNavbar />
-            <h1>Hello, world!</h1>
+
+            <Container>
+              <h1>Hello, world!</h1>
+              <footer className="text-center">
+                <small><a href="https://github.com/SirIsaacNeutron/writer">Source Code</a></small>
+              </footer>
+            </Container>
           </div>
         </Router>
       </Provider>
