@@ -1,9 +1,11 @@
 import React from 'react';
 import {
+    Collapse,
     Navbar,
     NavbarToggler,
     NavbarBrand,
     Nav,
+    NavLink,
     NavItem,
     Container
 } from 'reactstrap';
@@ -66,9 +68,14 @@ class AppNavbar extends React.Component {
                         <NavbarBrand tag={RRNavLink} exact to="/" 
                         className="my-navbar-brand">Writer</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
-                        <Nav className="ml-auto" navbar>
-                            { isAuthenticated ? authLinks : guestLinks }
-                        </Nav>
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/users">Users</NavLink>
+                                </NavItem>
+                                { isAuthenticated ? authLinks : guestLinks }
+                            </Nav>
+                        </Collapse>
                     </Container>
                 </Navbar>
             </div>

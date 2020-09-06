@@ -8,6 +8,8 @@ import { Container } from 'reactstrap';
 import store from './store'
 
 import AppNavbar from './components/AppNavbar';
+import UsersList from './components/UsersList';
+import Home from './components/Home';
 import { loadUser } from './actions/authActions';
 
 class App extends React.Component {
@@ -23,10 +25,9 @@ class App extends React.Component {
         <Router>
           <div className="App">
             <AppNavbar />
-
             <Container>
-              <h2>Hello, world!</h2>
-              <p>Test paragraph</p>
+              <Route path="/" exact component={Home} />
+              <Route path="/users" component={UsersList}/>
               <footer>
                 <small><a href="https://github.com/SirIsaacNeutron/writer">Source Code</a></small>
               </footer>
