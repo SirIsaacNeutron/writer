@@ -25,7 +25,6 @@ class UsersList extends React.Component {
     render() {
         const { users } = this.state;
         
-        console.log(users);
         return (
             <>
                 <h2>All Users</h2>
