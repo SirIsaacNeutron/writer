@@ -1,0 +1,26 @@
+a:hover {
+    color: #ff9100;
+    text-decoration: underline;
+}
+
+.my-navbar {
+    background: #ff9100;
+}
+
+.my-navbar a {
+    color: white;
+}
+
+.my-navbar a:link {
+    color: white;
+}
+
+.my-navbar a:hover {
+    color: black;
+}
+
+.my-navbar-brand {
+    font-family: 'Courgette', cursive;
+    font-size: 2em;
+    color: white;
+}

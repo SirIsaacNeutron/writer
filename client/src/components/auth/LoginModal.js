@@ -81,7 +81,7 @@ class LoginModal extends React.Component {
     render() {
         return (
             <div>
-                <NavLink onClick={this.toggle} href='#'>Login</NavLink>
+                <NavLink onClick={this.toggle} href='#login'>Login</NavLink>
 
                 <Modal
                 isOpen={this.state.modal}

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    Collapse,
     Navbar,
     NavbarToggler,
     NavbarBrand,
@@ -49,7 +48,7 @@ class AppNavbar extends React.Component {
         const authLinks = (
             <>
                 <NavItem>
-                    <span className="navbar-text mr-3">
+                    <span className="navbar-text text-white mr-3">
                         <strong>{user ? `Welcome, ${user.name}` : ''}</strong>
                     </span>
                 </NavItem>
@@ -62,15 +61,14 @@ class AppNavbar extends React.Component {
 
         return (
             <div>
-                <Navbar color="dark" dark expand="sm" className="mb-3">
+                <Navbar expand="sm" className="mb-3 my-navbar">
                     <Container>
-                        <NavbarBrand tag={RRNavLink} exact to="/">Writer</NavbarBrand>
+                        <NavbarBrand tag={RRNavLink} exact to="/" 
+                        className="my-navbar-brand">Writer</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
-                        <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav className="ml-auto" navbar>
-                                { isAuthenticated ? authLinks : guestLinks }
-                            </Nav>
-                        </Collapse>
+                        <Nav className="ml-auto" navbar>
+                            { isAuthenticated ? authLinks : guestLinks }
+                        </Nav>
                     </Container>
                 </Navbar>
             </div>

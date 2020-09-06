@@ -25,8 +25,9 @@ class App extends React.Component {
             <AppNavbar />
 
             <Container>
-              <h1>Hello, world!</h1>
-              <footer className="text-center">
+              <h2>Hello, world!</h2>
+              <p>Test paragraph</p>
+              <footer>
                 <small><a href="https://github.com/SirIsaacNeutron/writer">Source Code</a></small>
               </footer>
             </Container>

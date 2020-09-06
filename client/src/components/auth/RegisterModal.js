@@ -82,7 +82,7 @@ class RegisterModal extends React.Component {
     render() {
         return (
             <div>
-                <NavLink onClick={this.toggle} href='#'>Register</NavLink>
+                <NavLink onClick={this.toggle} href='#register'>Register</NavLink>
 
                 <Modal
                 isOpen={this.state.isOpen}
