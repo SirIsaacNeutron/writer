@@ -39,6 +39,9 @@ class AppNavbar extends React.Component {
         const guestLinks = (
             <>
                 <NavItem>
+                    <NavLink tag={RRNavLink} to="/users">Users</NavLink>
+                </NavItem>
+                <NavItem>
                     <RegisterModal />
                 </NavItem>
                 <NavItem>
@@ -53,6 +56,9 @@ class AppNavbar extends React.Component {
                     <span className="navbar-text text-white mr-3">
                         <strong>{user ? `Welcome, ${user.name}` : ''}</strong>
                     </span>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/users">Users</NavLink>
                 </NavItem>
                 <NavItem>
                     <Logout />
@@ -70,9 +76,6 @@ class AppNavbar extends React.Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/users">Users</NavLink>
-                                </NavItem>
                                 { isAuthenticated ? authLinks : guestLinks }
                             </Nav>
                         </Collapse>
