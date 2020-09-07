@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/api/users');
 const authRoutes = require('./routes/api/auth');
+const postRoutes = require('./routes/api/posts');
 
 const app = express();
 
@@ -36,5 +37,6 @@ const corsOptions = {
 app.use(cors());
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
 
 app.listen(port, () => console.log(`Server started on port ${port}.`));
