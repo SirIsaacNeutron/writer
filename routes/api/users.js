@@ -83,6 +83,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/posts', (req, res) => {
     Post.find({ user: req.params.id })
+    .sort({ dateCreated: -1 }) // To get the most recently created Posts first
     .then(posts => {
         res.json({ posts })
     })

@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { Alert } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -13,7 +14,9 @@ class CreatePost extends React.Component {
         msg: null,
         title: '',
         summary: '',
-        body: ''
+        body: '',
+        wasPostCreated: false,
+        newPostID: '',
     }
 
     onChange = e => {
@@ -60,7 +63,10 @@ class CreatePost extends React.Component {
 
         axios.post('http://localhost:5000/api/posts/', requestBody, config)
         .then(res => {
-            console.log(res);
+            this.setState({
+                wasPostCreated: true,
+                newPostID: res.data.post._id
+            });
         })
         .catch(err => {
             this.setState({
@@ -70,39 +76,45 @@ class CreatePost extends React.Component {
     }
 
     render() {
+        if (this.state.wasPostCreated) {
+            return (
+                <Redirect to={`/posts/${this.state.newPostID}`} />
+            );
+        }
+
         return (
             <>
                 <h2>Create Post</h2>
                 { this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null }
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label hmtlFor="title">Title:</label>
+                        <label htmlFor="title">Title:</label>
                         <input 
                         className="form-control form-control-lg" 
                         type="text"
                         name="title"
                         id="title"
                         placeholder="A nice title for your post."
-                        maxlength={300}
+                        maxLength={300}
                         required
                         onChange={this.onChange} />
                     </div>
 
                     <div className="form-group">
-                        <label hmtlFor="summary">Summary:</label>
+                        <label htmlFor="summary">Summary:</label>
                         <input 
                         className="form-control" 
                         type="text"
                         name="summary"
                         id="summary"
                         placeholder="A short summary of your post."
-                        maxlength={300}
+                        maxLength={300}
                         required
                         onChange={this.onChange} />
                     </div>
 
                     <div className="form-group">
-                        <label hmtlFor="body">Body:</label>
+                        <label htmlFor="body">Body:</label>
                         <textarea 
                         className="form-control" 
                         name="body"
