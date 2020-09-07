@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../../middleware/auth');
+
 const Post = require('../../models/Post');
 
 // Create new post
@@ -16,14 +18,20 @@ router.post('/', auth, (req, res) => {
 
     newPost.save()
     .then(post => {
-        res.json({ msg: 'Post successfully created.' });
+        res.json({ 
+            post,
+            msg: "Post successfully created."
+         });
+    })
+    .catch(err => {
+        console.log(err);
     })
 })
 
 // Get specific Post
-router.get('/post/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Post.findById(req.params.id)
-    .populate('user')
+    .populate('user', '_id name')
     .then(post => {
         if (!post) {
             res.json({ msg: "Post ID doesn't exist." });
@@ -33,3 +41,5 @@ router.get('/post/:id', (req, res) => {
         })
     })
 });
+
+module.exports = router;

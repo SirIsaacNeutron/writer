@@ -30,7 +30,7 @@ class UsersList extends React.Component {
                 <h2>All Users</h2>
                 { users.map(u => {
                     return (
-                        <Link to={`/users/${u._id}`}>
+                        <Link key={u._id} to={`/users/${u._id}`}>
                             <h3>{u.name}</h3>
                         </Link>
                     );

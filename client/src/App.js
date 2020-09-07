@@ -9,7 +9,11 @@ import store from './store'
 
 import AppNavbar from './components/AppNavbar';
 import UsersList from './components/UsersList';
+import CreatePost from './components/CreatePost';
+import PostView from './components/PostView';
+import UserView from './components/UserView';
 import Home from './components/Home';
+
 import { loadUser } from './actions/authActions';
 
 class App extends React.Component {
@@ -27,7 +31,10 @@ class App extends React.Component {
             <AppNavbar />
             <Container>
               <Route path="/" exact component={Home} />
-              <Route path="/users" component={UsersList}/>
+              <Route path="/users" exact component={UsersList}/>
+              <Route path="/users/:id/" component={UserView} />
+              <Route path='/create-post' component={CreatePost} />
+              <Route path='/posts/:id' component={PostView} />
               <footer>
                 <small><a href="https://github.com/SirIsaacNeutron/writer">Source Code</a></small>
               </footer>

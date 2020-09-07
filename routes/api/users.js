@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 // Create a new User
 router.post('/', (req, res) => {
@@ -70,5 +71,22 @@ router.get('/', (req, res) => {
     })
     .catch(err => console.log(err));
 });
+
+router.get('/:id', (req, res) => {
+    User.findById(req.params.id)
+    .select('name')
+    .then(user => {
+        res.json({ user });
+    })
+    .catch(err => console.log(err));
+});
+
+router.get('/:id/posts', (req, res) => {
+    Post.find({ user: req.params.id })
+    .then(posts => {
+        res.json({ posts })
+    })
+    .catch(err => console.log(err));
+})
 
 module.exports = router;

@@ -58,6 +58,9 @@ class AppNavbar extends React.Component {
                     </span>
                 </NavItem>
                 <NavItem>
+                    <NavLink tag={RRNavLink} to="/create-post">Create Post</NavLink>
+                </NavItem>
+                <NavItem>
                     <NavLink tag={RRNavLink} to="/users">Users</NavLink>
                 </NavItem>
                 <NavItem>
