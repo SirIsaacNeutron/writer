@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const helmet = require('helmet');
 
 const userRoutes = require('./routes/api/users');
 const authRoutes = require('./routes/api/auth');
@@ -33,8 +34,10 @@ const corsOptions = {
     }
 }
 
-//app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
+app.use(helmet());
+// Comment out the corsOptions line when testing using Postman
+// app.use(cors());
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
