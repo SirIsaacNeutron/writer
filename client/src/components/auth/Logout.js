@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 
 import { logout } from '../../actions/authActions';
 import { NavLink } from 'reactstrap';
+import { NavLink as RRNavLink } from 'react-router-dom';
 
 class Logout extends React.Component {
     render() {
         return (
             <>
-                <NavLink onClick={this.props.logout} href='#'>Logout</NavLink>
+                <NavLink tag={RRNavLink} to="/" onClick={this.props.logout}>Logout</NavLink>
             </>
         );
     }

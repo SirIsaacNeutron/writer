@@ -1,13 +1,8 @@
 import React from 'react';
 import {
-    Button,
     Modal,
     ModalHeader,
     ModalBody,
-    Form,
-    FormGroup,
-    Label,
-    Input,
     NavLink,
     Alert
 } from 'reactstrap';
@@ -82,7 +77,7 @@ class RegisterModal extends React.Component {
     render() {
         return (
             <div>
-                <NavLink onClick={this.toggle} href='#register'>Register</NavLink>
+                <NavLink onClick={this.toggle} href="#register">Register</NavLink>
 
                 <Modal
                 isOpen={this.state.isOpen}
@@ -90,41 +85,47 @@ class RegisterModal extends React.Component {
                     <ModalHeader toggle={this.toggle}>Register</ModalHeader>
                     <ModalBody>
                         { this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null }
-                        <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
-                                <Label htmlFor="name">Name</Label>
-                                <Input
-                                className="mb-3"
+                        <form onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="name">Name:</label>
+                                <input className="form-control"
                                 type="text"
                                 name="name"
                                 id="name"
-                                placeholder="Username"
+                                placeholder="A username"
+                                required
                                 onChange={this.onChange} />
+                            </div>
 
-                                <Label htmlFor="name">Email</Label>
-                                <Input
-                                className="mb-3"
+                            <div className="form-group">
+                                <label htmlFor="email">Email:</label>
+                                <input className="form-control"
                                 type="email"
                                 name="email"
                                 id="email"
-                                placeholder="Email"
+                                placeholder="Your email"
+                                required
                                 onChange={this.onChange} />
+                            </div>
 
-                                <Label htmlFor="password">Password</Label>
-                                <Input
-                                className="mb-3"
+                            <div className="form-group">
+                                <label htmlFor="password">Password:</label>
+                                <input className="form-control"
                                 type="password"
                                 name="password"
                                 id="password"
-                                placeholder="Password"
+                                placeholder="Your password"
+                                required
                                 onChange={this.onChange} />
-                                
-                                <Button 
-                                color="dark"
-                                className='mt-2'
-                                block>Register</Button>
-                            </FormGroup>
-                        </Form>
+                            </div>
+
+                            <div className="form-group">
+                                <button
+                                type="submit" 
+                                className="btn btn-block btn-outline-success"
+                                >Register</button>
+                            </div>
+                        </form>
                     </ModalBody>
                 </Modal>
             </div>

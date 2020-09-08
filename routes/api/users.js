@@ -12,11 +12,6 @@ router.post('/', (req, res) => {
     if (!process.env.jwtSecret) { return res.status(500).json({ msg: 'jwtSecret not defined.' }); }
     const { name, email, password } = req.body;
 
-    // Very simple validation! Not secure!
-    if (!name || !email || !password) {
-        return res.status(400).json({ msg: 'Please enter all fields.' });
-    }
-
     User.findOne({ email })
     .then(user => { 
         if (user) {
