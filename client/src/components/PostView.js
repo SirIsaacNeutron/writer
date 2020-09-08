@@ -32,14 +32,19 @@ class PostView extends React.Component {
     }
 
     render() {
-        const { title, summary, body, user, dateCreated } = this.state;
+        let { title, summary, body, user, dateCreated } = this.state;
 
+        dateCreated = new Date(dateCreated);
         return (
             <>
                 <h2>{title}</h2>
-                <h5>{summary}</h5>
-                <p>By <Link to={`/users/${user._id}`}>{user.name}</Link></p>
-                <p>Created on {dateCreated}</p>
+                <p>
+                    By <Link to={`/users/${user._id}`}>{user.name}</Link>.
+                    Created on {dateCreated.toLocaleString()}.
+                </p>
+                <hr />
+                <p><strong>Summary:</strong> {summary}</p>
+                <hr />
                 <p>{body}</p>
             </>
         );
