@@ -61,7 +61,7 @@ class CreatePost extends React.Component {
 
         const requestBody = JSON.stringify(newPost);
 
-        axios.post('http://localhost:5000/api/posts/', requestBody, config)
+        axios.post('/api/posts/', requestBody, config)
         .then(res => {
             this.setState({
                 wasPostCreated: true,

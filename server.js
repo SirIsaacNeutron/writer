@@ -29,7 +29,8 @@ const port = process.env.PORT || 5000;
 const whitelist = ['http://localhost:3000'];
 const corsOptions = {
     origin: function(origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
+        // See https://www.npmjs.com/package/cors#configuring-cors-w-dynamic-origin
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
         }
         else {
@@ -49,7 +50,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(cors(corsOptions));
 app.use(helmet());
 // Comment out the corsOptions line when testing using Postman
-// app.use(cors());
+//app.use(cors());
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);

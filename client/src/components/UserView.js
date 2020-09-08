@@ -15,7 +15,7 @@ class UserView extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/api/users/${this.props.match.params.id}`)
+        axios.get(`/api/users/${this.props.match.params.id}`)
         .then(res => {
             this.setState({
                 name: res.data.user.name
@@ -23,7 +23,7 @@ class UserView extends React.Component {
         })
         .catch(err => console.log(err));
 
-        axios.get(`http://localhost:5000/api/users/${this.props.match.params.id}/posts`)
+        axios.get(`/api/users/${this.props.match.params.id}/posts`)
         .then(res => {
             this.setState({
                 posts: res.data.posts

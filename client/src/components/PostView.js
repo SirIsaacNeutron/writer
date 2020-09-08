@@ -18,7 +18,7 @@ class PostView extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/api/posts/${this.props.match.params.id}`)
+        axios.get(`/api/posts/${this.props.match.params.id}`)
         .then(res => {
             this.setState({
                 title: res.data.post.title,
