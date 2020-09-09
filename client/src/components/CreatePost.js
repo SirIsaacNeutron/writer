@@ -5,6 +5,8 @@ import axios from 'axios';
 import { Alert } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 
+import { Helmet } from 'react-helmet';
+
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
@@ -56,7 +58,6 @@ class CreatePost extends React.Component {
             title,
             summary,
             body,
-            user: user.id
         }
 
         const requestBody = JSON.stringify(newPost);
@@ -84,6 +85,10 @@ class CreatePost extends React.Component {
 
         return (
             <>
+                <Helmet>
+                    <title>Create Post</title>
+                </Helmet>
+                
                 <h2>Create Post</h2>
                 { this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null }
                 <form onSubmit={this.onSubmit}>

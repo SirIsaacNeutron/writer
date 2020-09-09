@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { Helmet } from 'react-helmet';
+
 import axios from 'axios';
 
 class UsersList extends React.Component {
@@ -27,6 +29,10 @@ class UsersList extends React.Component {
         
         return (
             <>
+                <Helmet>
+                    <title>Users</title>
+                </Helmet>
+
                 <h2>All Users</h2>
                 { users.map(u => {
                     return (

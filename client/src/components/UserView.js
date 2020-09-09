@@ -2,6 +2,8 @@ import React from 'react';
 
 import axios from 'axios';
 
+import { Helmet } from 'react-helmet';
+
 import { Link } from 'react-router-dom';
 
 class UserView extends React.Component {
@@ -35,7 +37,11 @@ class UserView extends React.Component {
     render() {
         const { name, posts } = this.state; 
         return (
-            <>
+            <>  
+                <Helmet>
+                    <title>{this.state.name}</title>
+                </Helmet>
+                
                 <h2>{name}</h2>
                 {posts.map(p => {
                     const dateCreated = new Date(p.dateCreated);

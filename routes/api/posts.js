@@ -7,13 +7,13 @@ const Post = require('../../models/Post');
 
 // Create new post
 router.post('/', auth, (req, res) => {
-    const { title, summary, body, user } = req.body;
+    const { title, summary, body } = req.body;
 
     const newPost = new Post({
         title,
         summary,
         body,
-        user
+        user: req.user.id
     });
 
     newPost.save()

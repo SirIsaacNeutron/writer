@@ -4,6 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
+import { Helmet } from 'react-helmet';
+
 import axios from 'axios';
 
 class PostView extends React.Component {
@@ -57,13 +59,7 @@ class PostView extends React.Component {
             return;
         }
 
-        const deletePost = {
-            user: user.id,
-        }
-
-        const requestBody = JSON.stringify(deletePost);
-
-        axios.delete(`/api/posts/${this.props.match.params.id}`, config, requestBody)
+        axios.delete(`/api/posts/${this.props.match.params.id}`, config)
         .then(res => {
             this.setState({
                 wasDeleted: true
@@ -97,6 +93,10 @@ class PostView extends React.Component {
         
         return (
             <>
+                <Helmet>
+                    <title>{this.state.title}</title>
+                </Helmet>
+
                 <h2>{title}</h2>
                 <p>
                     By <Link to={`/users/${user._id}`}>{user.name}</Link>.
