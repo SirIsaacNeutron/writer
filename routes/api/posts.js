@@ -42,4 +42,25 @@ router.get('/:id', (req, res) => {
     })
 });
 
+router.delete('/:id', auth, (req, res) => {
+    Post.findById(req.params.id)
+    .then(post => {
+        if (!post) { res.status(400).json({ msg: "Post doesn't exist." }); }
+        if (post.user == req.user.id) {
+            Post.findByIdAndDelete(post._id)
+            .then(deletedPost => {
+                res.json({ deletedPost })
+            })
+        }
+        else {
+            res.status(400).json({ 
+                msg: "You aren't authorized to delete this post.",
+                post, 
+                userID: req.user.id
+            })
+        }
+    })
+    .catch(err => console.log(err));
+});
+
 module.exports = router;

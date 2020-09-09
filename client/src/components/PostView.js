@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 import axios from 'axios';
 
@@ -14,6 +16,7 @@ class PostView extends React.Component {
             body: '',
             user: {},
             dateCreated: '',
+            wasDeleted: false
         }
     }
 
@@ -31,10 +34,67 @@ class PostView extends React.Component {
         .catch(err => console.log(err));
     }
 
+    onDelete = e => {
+        let config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+
+        const { user } = this.props.auth;
+        if (!user) {
+            this.setState({
+                msg: "You must be logged in to delete posts."
+            });
+            return;
+        }
+
+        const token = this.props.auth.token;
+        if (token) {
+            config.headers['x-auth-token'] = token;
+        }
+        else {
+            return;
+        }
+
+        const deletePost = {
+            user: user.id,
+        }
+
+        const requestBody = JSON.stringify(deletePost);
+
+        axios.delete(`/api/posts/${this.props.match.params.id}`, config, requestBody)
+        .then(res => {
+            this.setState({
+                wasDeleted: true
+            })
+        })
+        .catch(err => console.log(err));
+    }
+
     render() {
+        if (this.state.wasDeleted) {
+            return (
+                <Redirect to="/" />
+            );
+        }
+
+        const canControl = (this.props.auth.isAuthenticated 
+            && this.props.auth.user.id === this.state.user._id);
+
         let { title, summary, body, user, dateCreated } = this.state;
+        
+        const controls = (
+            <div className="d-flex">
+                <button 
+                type="button" 
+                className="btn btn-outline-danger"
+                onClick={this.onDelete}>Delete</button>
+            </div>
+        );
 
         dateCreated = new Date(dateCreated);
+        
         return (
             <>
                 <h2>{title}</h2>
@@ -46,9 +106,14 @@ class PostView extends React.Component {
                 <p><strong>Summary:</strong> {summary}</p>
                 <hr />
                 <p>{body}</p>
+                { canControl ? controls : null }
             </>
         );
     }
 }
 
-export default PostView;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(PostView);
