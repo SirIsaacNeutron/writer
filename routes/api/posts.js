@@ -42,6 +42,27 @@ router.get('/:id', (req, res) => {
     })
 });
 
+router.post('/:id/update', auth, (req, res) => {
+    Post.findById(req.params.id)
+    .then(post => {
+        if (!post) { res.status(400).json({ msg: "Post doesn't exist." }); }
+        // We need to use == instead of === here
+        if (post.user == req.user.id) {
+            const reqInfo = {
+                title: req.body.title,
+                summary: req.body.summary,
+                body: req.body.body,
+                dateEdited: req.body.dateEdited
+            }
+            Post.findByIdAndUpdate(post._id, reqInfo, { useFindAndModify: false })
+            .then(newPost => {
+                res.json({ newPost })
+            })
+        }
+    })
+    .catch(err => console.log(err));
+});
+
 router.delete('/:id', auth, (req, res) => {
     Post.findById(req.params.id)
     .then(post => {

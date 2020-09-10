@@ -45,10 +45,15 @@ class UserView extends React.Component {
                 <h2>{name}</h2>
                 {posts.map(p => {
                     const dateCreated = new Date(p.dateCreated);
+                    let dateEdited = null;
+                    if (p.dateEdited) { dateEdited = new Date(p.dateEdited); }
                     return (
                         <div key={p._id}>
                             <Link to={`/posts/${p._id}`}><h3>{p.title}</h3></Link>
-                            <p> { dateCreated.toLocaleString() }</p>
+                            <p> 
+                                { dateCreated.toLocaleString() }
+                                { dateEdited ? `. Updated on ${dateEdited.toLocaleString()}` : null }
+                            </p>
                         </div>
                     );
                 })}

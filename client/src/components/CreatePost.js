@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
+import PostForm from './PostForm';
+
 class CreatePost extends React.Component {
     state = {
         msg: null,
@@ -88,53 +90,11 @@ class CreatePost extends React.Component {
                 <Helmet>
                     <title>Create Post</title>
                 </Helmet>
-                
+
                 <h2>Create Post</h2>
                 { this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null }
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="title">Title:</label>
-                        <input 
-                        className="form-control form-control-lg" 
-                        type="text"
-                        name="title"
-                        id="title"
-                        placeholder="A nice title for your post."
-                        maxLength={300}
-                        required
-                        onChange={this.onChange} />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="summary">Summary:</label>
-                        <input 
-                        className="form-control" 
-                        type="text"
-                        name="summary"
-                        id="summary"
-                        placeholder="A short summary of your post."
-                        maxLength={300}
-                        required
-                        onChange={this.onChange} />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="body">Body:</label>
-                        <textarea 
-                        className="form-control" 
-                        name="body"
-                        id="body"
-                        placeholder="Your post's content."
-                        required
-                        onChange={this.onChange} />
-                    </div>
-
-                    <div className="form-group">
-                        <button
-                        type="submit"
-                        className="btn btn-outline-success">Create Post</button>
-                    </div>
-                </form>
+                <PostForm onSubmit={this.onSubmit} onChange={this.onChange}
+                title={this.state.title} summary={this.state.summary} body={this.state.body} />
             </>
         );
     }
