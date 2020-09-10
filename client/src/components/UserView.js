@@ -41,13 +41,13 @@ class UserView extends React.Component {
                 <Helmet>
                     <title>{this.state.name}</title>
                 </Helmet>
-                
+
                 <h2>{name}</h2>
                 {posts.map(p => {
                     const dateCreated = new Date(p.dateCreated);
                     return (
-                        <div>
-                            <Link key={p._id} to={`/posts/${p._id}`}><h3>{p.title}</h3></Link>
+                        <div key={p._id}>
+                            <Link to={`/posts/${p._id}`}><h3>{p.title}</h3></Link>
                             <p> { dateCreated.toLocaleString() }</p>
                         </div>
                     );
