@@ -48,8 +48,9 @@ class UserView extends React.Component {
                     let dateEdited = null;
                     if (p.dateEdited) { dateEdited = new Date(p.dateEdited); }
                     return (
-                        <div key={p._id}>
+                        <div key={p._id} className="mb-1">
                             <Link to={`/posts/${p._id}`}><h3>{p.title}</h3></Link>
+                            <p className="mb-1 font-italic">{p.summary}</p>
                             <p> 
                                 { dateCreated.toLocaleString() }
                                 { dateEdited ? `. Updated on ${dateEdited.toLocaleString()}` : null }
