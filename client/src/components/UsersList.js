@@ -34,13 +34,17 @@ class UsersList extends React.Component {
                 </Helmet>
 
                 <h2>All Users</h2>
-                { users.map(u => {
-                    return (
-                        <Link key={u._id} to={`/users/${u._id}`}>
-                            <h3>{u.name}</h3>
-                        </Link>
-                    );
-                }) }
+                <div className="row">
+                    {users.map(u => {
+                        return (
+                            <div key={u._id} className="col-lg-2 col-md-3 col-sm-6 d-flex mb-2">
+                                <Link to={`/users/${u._id}`}>
+                                    <h3>{u.name}</h3>
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </div>
             </>
         );
     }
