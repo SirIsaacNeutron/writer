@@ -1,12 +1,15 @@
 import React from 'react';
 
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import { Helmet } from 'react-helmet';
 
 import PostForm from './PostForm';
+
+import PostPreview from './PostPreview';
+import PostFormHelper from './PostFormHelper';
 
 import axios from 'axios';
 
@@ -143,7 +146,7 @@ class PostView extends React.Component {
         let { title, summary, body, user, dateCreated } = this.state;
         
         const controls = (
-            <div className="d-flex mb-4">
+            <div className="d-flex mb-4 mt-4">
                 <button 
                 type="button" 
                 className="btn btn-outline-danger mr-3"
@@ -157,45 +160,58 @@ class PostView extends React.Component {
 
         dateCreated = new Date(dateCreated);
 
-        let dateEdited = '';
+        let dateEdited = null;
         if (this.state.dateEdited !== '') {
             dateEdited = new Date(this.state.dateEdited);
         }
+
+        const sampleDateEdited = new Date();
 
         // Note: postView doesn't show dateEdited immediately after 
         // editing; the user has to visit the page again in order for it to
         // show.
         const postView = (
             <>
-                <h2>{title}</h2>
-                <p>
-                    By <Link to={`/users/${user._id}`}>{user.name}</Link>.
-                    Created on {dateCreated.toLocaleString()}.
-                    { this.state.dateEdited ? ` Edited on ${dateEdited.toLocaleString()}.` : null}
-                </p>
-                <hr />
-                <p><strong>Summary:</strong> {summary}</p>
-                <hr />
-                {body.split('\n').map((paragraph, index) => {
-                    return (
-                        <div key={index}>
-                            <p>{paragraph}</p>
-                        </div>
-                    );
-                })}
+                <PostPreview title={title} summary={summary} body={body}
+                user={user} dateCreated={dateCreated} dateEdited={dateEdited}/>
                 { canControl ? controls : null }
             </>
         );
         
+        const postEditView = (
+            <>
+                { /*<a className="mb-2" target="_blank" href="https://guides.github.com/features/mastering-markdown/">Text Formatting Guide</a>
+                <p>
+                    <button className="btn btn-outline-primary" type="button" 
+                    data-toggle="collapse" data-target="#preview" 
+                    aria-expanded="false" 
+                    aria-controls="preview">
+                        Preview
+                    </button>
+                </p>
+                <div className="collapse" id="preview">
+                    <div className="card card-body">
+                        <PostPreview title={this.state.title} summary={this.state.summary}
+                        body={this.state.body} user={user} dateCreated={dateCreated} 
+                        dateEdited={sampleDateEdited} />
+                    </div>
+                </div> */ } 
+                <PostFormHelper title={this.state.title} summary={this.state.summary}
+                body={this.state.body} user={user} dateCreated={dateCreated} 
+                dateEdited={sampleDateEdited} />
+                <PostForm edit onSubmit={this.onSubmit} onChange={this.onChange}
+                title={this.state.title} summary={this.state.summary} body={this.state.body} />
+            </>
+        );
+
         return (
             <>
                 <Helmet>
                     <title>{this.state.title}</title>
                 </Helmet>
 
-                { this.state.isEditing ? 
-                <PostForm edit onSubmit={this.onSubmit} onChange={this.onChange}
-                title={this.state.title} summary={this.state.summary} body={this.state.body} />
+                { this.state.isEditing ?
+                postEditView
                 : postView }
             </>
         );
