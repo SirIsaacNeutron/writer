@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 
 import PostForm from './PostForm';
 
+import PostPreview from './PostPreview';
+
 class CreatePost extends React.Component {
     state = {
         msg: null,
@@ -39,15 +41,7 @@ class CreatePost extends React.Component {
                 "Content-Type": "application/json"
             }
         }
-
-        const { user } = this.props.auth;
-        if (!user) {
-            this.setState({
-                msg: "You must be logged in to create posts."
-            });
-            return;
-        }
-
+        
         const token = this.props.auth.token;
         if (token) {
             config.headers['x-auth-token'] = token;
@@ -85,6 +79,15 @@ class CreatePost extends React.Component {
             );
         }
 
+        const { user } = this.props.auth;
+        if (!user) {
+            return (
+                <Redirect to={'/'} />
+            );
+        }
+
+        const sampleDateCreated = new Date();
+
         return (
             <>
                 <Helmet>
@@ -93,6 +96,20 @@ class CreatePost extends React.Component {
 
                 <h2>Create Post</h2>
                 { this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null }
+                <p>
+                    <button class="btn btn-outline-primary" type="button" 
+                    data-toggle="collapse" data-target="#preview" 
+                    aria-expanded="false" 
+                    aria-controls="preview">
+                        Preview
+                    </button>
+                </p>
+                <div class="collapse" id="preview">
+                    <div class="card card-body">
+                        <PostPreview title={this.state.title} summary={this.state.summary}
+                        body={this.state.body} user={user} dateCreated={sampleDateCreated} />
+                    </div>
+                </div>
                 <PostForm onSubmit={this.onSubmit} onChange={this.onChange}
                 title={this.state.title} summary={this.state.summary} body={this.state.body} />
             </>

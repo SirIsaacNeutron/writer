@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import { Helmet } from 'react-helmet';
 
 import PostForm from './PostForm';
+
+import PostPreview from './PostPreview';
 
 import axios from 'axios';
 
@@ -157,7 +159,7 @@ class PostView extends React.Component {
 
         dateCreated = new Date(dateCreated);
 
-        let dateEdited = '';
+        let dateEdited = null;
         if (this.state.dateEdited !== '') {
             dateEdited = new Date(this.state.dateEdited);
         }
@@ -167,22 +169,8 @@ class PostView extends React.Component {
         // show.
         const postView = (
             <>
-                <h2>{title}</h2>
-                <p>
-                    By <Link to={`/users/${user._id}`}>{user.name}</Link>.
-                    Created on {dateCreated.toLocaleString()}.
-                    { this.state.dateEdited ? ` Edited on ${dateEdited.toLocaleString()}.` : null}
-                </p>
-                <hr />
-                <p><strong>Summary:</strong> {summary}</p>
-                <hr />
-                {body.split('\n').map((paragraph, index) => {
-                    return (
-                        <div key={index}>
-                            <p>{paragraph}</p>
-                        </div>
-                    );
-                })}
+                <PostPreview title={title} summary={summary} body={body}
+                user={user} dateCreated={dateCreated} dateEdited={dateEdited}/>
                 { canControl ? controls : null }
             </>
         );
