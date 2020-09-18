@@ -176,7 +176,13 @@ class PostView extends React.Component {
                 <hr />
                 <p><strong>Summary:</strong> {summary}</p>
                 <hr />
-                <p>{body}</p>
+                {body.split('\n').map((paragraph, index) => {
+                    return (
+                        <div key={index}>
+                            <p>{paragraph}</p>
+                        </div>
+                    );
+                })}
                 { canControl ? controls : null }
             </>
         );
