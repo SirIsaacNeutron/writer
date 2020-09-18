@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 
 import PostForm from './PostForm';
 
-import PostPreview from './PostPreview';
+import PostFormHelper from './PostFormHelper';
 
 class CreatePost extends React.Component {
     state = {
@@ -41,7 +41,7 @@ class CreatePost extends React.Component {
                 "Content-Type": "application/json"
             }
         }
-        
+
         const token = this.props.auth.token;
         if (token) {
             config.headers['x-auth-token'] = token;
@@ -96,20 +96,8 @@ class CreatePost extends React.Component {
 
                 <h2>Create Post</h2>
                 { this.state.msg ? <Alert color="danger">{this.state.msg}</Alert> : null }
-                <p>
-                    <button class="btn btn-outline-primary" type="button" 
-                    data-toggle="collapse" data-target="#preview" 
-                    aria-expanded="false" 
-                    aria-controls="preview">
-                        Preview
-                    </button>
-                </p>
-                <div class="collapse" id="preview">
-                    <div class="card card-body">
-                        <PostPreview title={this.state.title} summary={this.state.summary}
-                        body={this.state.body} user={user} dateCreated={sampleDateCreated} />
-                    </div>
-                </div>
+                <PostFormHelper title={this.state.title} summary={this.state.summary}
+                body={this.state.body} user={user} dateCreated={sampleDateCreated} />
                 <PostForm onSubmit={this.onSubmit} onChange={this.onChange}
                 title={this.state.title} summary={this.state.summary} body={this.state.body} />
             </>
