@@ -180,22 +180,6 @@ class PostView extends React.Component {
         
         const postEditView = (
             <>
-                { /*<a className="mb-2" target="_blank" href="https://guides.github.com/features/mastering-markdown/">Text Formatting Guide</a>
-                <p>
-                    <button className="btn btn-outline-primary" type="button" 
-                    data-toggle="collapse" data-target="#preview" 
-                    aria-expanded="false" 
-                    aria-controls="preview">
-                        Preview
-                    </button>
-                </p>
-                <div className="collapse" id="preview">
-                    <div className="card card-body">
-                        <PostPreview title={this.state.title} summary={this.state.summary}
-                        body={this.state.body} user={user} dateCreated={dateCreated} 
-                        dateEdited={sampleDateEdited} />
-                    </div>
-                </div> */ } 
                 <PostFormHelper title={this.state.title} summary={this.state.summary}
                 body={this.state.body} user={user} dateCreated={dateCreated} 
                 dateEdited={sampleDateEdited} />
