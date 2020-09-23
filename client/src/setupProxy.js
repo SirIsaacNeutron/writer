@@ -1,10 +1,14 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
+const url = process.env.PORT
+  ? `http://localhost:${process.env.PORT}`
+  : "http://localhost:5000";
+
 module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:5000',
+      target: url,
       changeOrigin: true,
     })
   );
